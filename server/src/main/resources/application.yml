@@ -1,0 +1,22 @@
+server:
+  port: 8081
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+logging:
+  level:
+    root: ERROR
+    org:
+      springframework:
+        web: ERROR
+      hibernate: ERROR
+      mybatis: ERROR
+  path: D:/logs/server.log
+#  file: ./logs/server.log
