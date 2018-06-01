@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: service-hello
+
+server:
+  port: 8762
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
+
+
+logging:
+  level:
+    root: ERROR
+    org:
+      springframework:
+        web: ERROR
+      hibernate: ERROR
+      mybatis: ERROR
+  path: D:/temp/logs/client.log
+  file: ./logs/client.log
