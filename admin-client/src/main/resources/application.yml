@@ -1,9 +1,9 @@
 spring:
   application:
-    name: service-hello
+    name: service-admin-client
 
 server:
-  port: 8762
+  port: 8082
 
 eureka:
   instance:
@@ -21,5 +21,5 @@ logging:
         web: ERROR
       hibernate: ERROR
       mybatis: ERROR
-  path: D:/temp/logs/client.log
-  file: ./logs/client.log
+  path: D:/temp/logs/user-client.log
+  file: ./logs/user-client.log

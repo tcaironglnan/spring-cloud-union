@@ -18,5 +18,5 @@ logging:
         web: ERROR
       hibernate: ERROR
       mybatis: ERROR
-  path: D:/logs/server.log
-#  file: ./logs/server.log
+  path: D:/logs/service-server.log
+  file: ./logs/service-server.log
