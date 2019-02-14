@@ -17,6 +17,7 @@
         <module>service-server</module>
         <module>admin-client</module>
         <module>user-client</module>
+        <module>spring-boot</module>
     </modules>
 
     <properties>
