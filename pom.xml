@@ -14,10 +14,12 @@
     <url>http://www.example.com</url>
 
     <modules>
-        <module>service-server</module>
+        <module>service-eureka</module>
         <module>admin-client</module>
         <module>user-client</module>
-        <module>spring-boot</module>
+        <module>server</module>
+        <module>server-jpa</module>
+        <module>server-redis-mongodb</module>
     </modules>
 
     <properties>
