@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cloud.docker.dao.UserRepository">
+
+    <select id="findOne" parameterType="java.lang.Long" resultType="com.cloud.docker.model.User">
+    select * from user where id=#{id}
+  </select>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(1) from user
+    </select>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.cloud.docker.model.User">
+    insert into user(username,name,age,balance) values (#{username},#{name},#{age},#{balance})
+  </insert>
+
+    <insert id="insertOfUser" parameterType="com.cloud.docker.model.User">
+    insert into user(username,name,age,balance) values (#{username},#{name},#{age},#{balance})
+  </insert>
+</mapper>

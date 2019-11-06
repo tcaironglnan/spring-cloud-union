@@ -1,0 +1,99 @@
+# 注: 在使用该微服务前,必须先安装redis和mongoDB,并且相关配置都配置好,否则会启动报错
+#配置访问端口,或者IP地址
+server:
+  port: 8052
+
+management:
+  security:
+    enabled: false
+
+eureka:
+  instance:
+    # 自定义虚拟主机名,如果不是自定义,默认的虚拟主机名就是:cloud-docker-server-redis-mongodb
+    # 而且虚拟主机名中不能出现"_"(下划线),否则ribbon在调用时会抛异常
+#    secure-virtual-host-name: cloud-docker-server-redis-mongodb
+    prefer-ip-address: true
+    # 自定义元数据 key/value任意
+    metadata-map:
+      my-metadata: user-server
+  client:
+    service-url:
+      defaultZone: http://root:root@localhost:8081/eureka/
+#      defaultZone: http://localhost:8081/eureka/
+#      defaultZone: http://docker1:8081/eureka/,http://docker2:8089/eureka/
+
+#配置spring框架
+spring:
+  # 配置mongoDB参数
+  data:
+    mongodb:
+      # 多个地址使用逗号隔开
+      # mongodb需要帐号密码登录
+      # uri: mongodb://name:pass@localhost:27017/local
+      # mongoDB不需要帐号密码登录
+#      uri: mongodb://localhost:27017/local
+      # 常规配置
+      host: 127.0.0.1
+      port: 27017
+      database: local
+      # 如果mongoDB没有配置登录帐号密码则需要注掉,否则会报错
+#      username:
+#      password:
+  application:
+    name: server-redis-mongodb
+  thymeleaf:
+    prefix: classpath:/templates/
+  datasource:
+    name: world
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid相关配置
+    druid:
+      #监控统计拦截的filters
+      filters: stat
+      driver-class-name: com.mysql.jdbc.Driver
+      #基本属性
+      #      url: jdbc:mysql://127.0.0.1:3306/world?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true
+      url: jdbc:mysql://127.0.0.1:3306/world?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      username: root
+      password: root
+      #配置初始化大小/最小/最大
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      #获取连接等待超时时间
+      max-wait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      #一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+
+#配置mybatis框架
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.cloud.docker.model
+
+#配置springBoot自带的日志插件
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        web: INFO
+      hibernate: ERROR
+      mybatis: ERROR
+#  path: D:/logs/server-redis-mongodb.log  #指定日志的保存路径
+  file: ./logs/server-redis-mongodb.log #指定日志的保存文件名
